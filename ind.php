@@ -15,19 +15,19 @@
 	?>
 
 	<div id="content">
-		<h1><?php echo $title?></h1>
+		<h1><?= $title?></h1>
 		
 		<ul id="menu">
 			<li><a href="#">home</a></li>
 			<li><a href="#">archive</a></li>
 			<li><a href="#">contact</a></li>
-			<li><a href="#"><?php echo $year?></a></li>
+			<li><a href="#"><?= $year?></a></li>
 		</ul>
 	
 		<div class="post">
 			<div class="details">
 				<h2><a href="#">Nunc commodo euismod massa quis vestibulum</a></h2>
-				<p class="info"><?php echo $post?><a href="#">general</a></p>
+				<p class="info"><?= $post?><a href="#">general</a></p>
 			
 			</div>
 			<div class="body">
