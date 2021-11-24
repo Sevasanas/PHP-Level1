@@ -6,7 +6,7 @@ $districts = [
 ];
 
 
-function outputCity($arr) {
+/*function outputCity($arr) {
     foreach($arr as $key => $value) {
         echo "<br> $key :<br>";
         for($i = 0; $i < $arrLength = count($arr[$key]); $i++) {
@@ -16,6 +16,11 @@ function outputCity($arr) {
             }
         }
     }
+}*/
+
+foreach($districts as $key => $value){
+    $str = implode(',', $value) .".";
+    echo "$key: <br>$str<br>";
 }
 
 function searchCity($char, $arr) {
@@ -36,6 +41,6 @@ function searchCity($char, $arr) {
     }
 }
 
-outputCity($districts);
+//outputCity($districts);
 searchCity('К', $districts);
 
