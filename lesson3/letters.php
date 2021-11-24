@@ -52,8 +52,12 @@ function replace($text) {
     echo str_replace(" ", "_", $text);
 };
 
+function translitAndReplace($text) {
+    return replace(translit($text));
+}
 
 $text = "Красота спасёт мир!<br>";
 echo translit($text);
 echo replace($text);
+echo translitAndReplace($text);
     
