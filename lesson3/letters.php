@@ -18,6 +18,7 @@ function translit($text) {
         'м' => 'm',
         'н' => 'n',
         'о' => 'o',
+        'п' => 'p',
         'р' => 'r',
         'с' => 's',
         'т' => 't',
@@ -43,11 +44,15 @@ function translit($text) {
         $text .= (isset($letters[$val])) ? $letters[$val] : $val;
     }
     return $text;
+
+    //return strtr(mb_strtolower($text), $letters);
 }
 
 function replace($text) {
     echo str_replace(" ", "_", $text);
 };
+
+
 $text = "Красота спасёт мир!<br>";
 echo translit($text);
 echo replace($text);
