@@ -68,8 +68,8 @@ if ($errorCode !== UPLOAD_ERR_OK || !is_uploaded_file($fileTmpName)) {
     // Сократим .jpeg до .jpg
     $format = str_replace('jpeg', 'jpg', $extension);
 
-    // Переместим картинку с новым именем и расширением в папку /small
-    if (!move_uploaded_file($fileTmpName, __DIR__ . '/small/' . $name . $format)) {
+    // Переместим картинку с новым именем и расширением в папку /images
+    if (!move_uploaded_file($fileTmpName, __DIR__ . '/images/' . $name . $format)) {
         die('При записи изображения на диск произошла ошибка.');
     }?>
     <a href="index.php"> Вернуться в галерею</a><br>
