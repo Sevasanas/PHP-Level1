@@ -15,15 +15,13 @@ require_once 'blocks/config.php';
         <h1 class="title">Сериалы</h1>
     </header>
     <div class="gallery">
-    <?php
-    $files = scandir("images");
-    for($i=2; $i < count($files); $i++){?>
-        <a href="fullImage.php?img=<?= $files[$i]?>">
-        <img src="<?= PHOTOSMALL.$files[$i]?>" alt = "">
-    </a>
-    <?php 
-    } 
-    ?>
+        <?php
+        $files = scandir("images");
+        for($i=2; $i < count($files); $i++) :?>
+            <a href="fullImage.php?img=<?= $files[$i]?>">
+            <img src="<?= PHOTOSMALL.$files[$i]?>" alt = "">
+            </a>
+        <?php endfor;?>
     </div>
     <?php
         require 'upload.php';
