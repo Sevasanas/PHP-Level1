@@ -1,0 +1,44 @@
+.gallery {
+    width: 80%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2vw;
+}
+
+.title {
+    font-size: 64px;
+    text-transform: uppercase;
+    margin-left: 250px;
+    margin-bottom: 50px;
+}
+
+.photo {
+    margin-top: 30px;
+}
+
+.input {
+    background-color: darkslategray;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.link {
+    font-size: 20px;
+}
+
+.photo_title {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.photo_text {
+    font-size: 20px;
+}
+
+.photo_count {
+    font-size: 14px;
+}
