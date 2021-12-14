@@ -9,8 +9,8 @@
 <body>
 <script>
     function save(id){
-       let count = document.getElementById("good_"+id).value;//получили актуальное количество товаров
-       location.href = "/?page=cart&id_good="+id+"&count="+count;//после этой инструкции запускается инструкция на строке 28
+       let count = document.getElementById("pizza_"+id).value;//получили актуальное количество товаров
+       location.href = "/?page=cart&id_pizza="+id+"&count="+count;//после этой инструкции запускается инструкция на строке 28
     }
 </script>
 <?php
@@ -25,51 +25,54 @@ if(isset($_GET['finish'])):?>
 <?php
 endif;
 if(isset($_GET['count'])){
-    updateCountInCart($link,$_GET['id_good'],$_GET['count']);
+    updateCountInCart($link,$_GET['id_pizza'],$_GET['count']);
 }
-if(!isset($_SESSION['order'])):?>
-<div class="modal modal-cart is-open">
+if(!isset($_SESSION['order'])){?>
+	<div class="modal modal-cart is-open">
 		<div class="modal-dialog">
 			<div class="modal-header">
 				<h3 class="modal-title">Корзина</h3>
 				<button class="close">&times;</button>
 			</div>
 			<!-- /.modal-header -->
-            <?php
-            else:?>
-            <h3 class="modal-title">Ваш заказ</h3>
-            <?php
-            $sql = "SELECT id_good, name, price*count AS sum, count FROM pizza INNER JOIN cart ON cart.id_good = pizza.id AND id_user=".$_SESSION['id_user'];
-            $increase = "UPDATE cart SET count = count + 1 WHERE id = id_good";
-            $reduce = "UPDATE cart SET count = count - 1 WHERE id = id_good";
-            $res = mysqli_query($link,$sql);
-            while($data = mysqli_fetch_assoc($res)):?>
-			<div class="modal-body">
-				<div class="food-row">
-					<span class="food-name"><?= $data['name']?></span>
-					<strong class="food-price"><?= $data['price']?></strong>
-                    <div class="food-counter">
-						<button class="counter-button">-<?= $reduce?></button>
-						<span class="counter"><?= $data['count']?></span>
-						<button class="counter-button">+<?= $increase?></button>
-					</div>
+<?php
+}else{?>
+        <h3 class="modal-title">Ваш заказ</h3>
+        <?php
+        $sql = "SELECT id_pizza, name, price*count AS sum, count FROM pizza INNER JOIN cart ON cart.id_pizza = pizza.id AND id_user=".$_SESSION['id_user'];
+        $increase = "UPDATE cart SET count = count + 1 WHERE id = id_pizza";
+        $reduce = "UPDATE cart SET count = count - 1 WHERE id = id_pizza";
+        $res = mysqli_query($link,$sql);
+        while($data = mysqli_fetch_assoc($res)):?>
+		<div class="modal-body">
+			<div class="food-row">
+				<span class="food-name"><?= $data['name']?></span>
+				<strong class="food-price"><?= $data['price']?></strong>
+                <div class="food-counter">
+					<button class="counter-button">-<?= $reduce?></button>
+					<span class="counter"><?= $data['count']?></span>
+					<button class="counter-button">+<?= $increase?></button>
 				</div>
+			</div>
 				<!-- /.foods-row -->
 				
 			<!-- /.modal-body -->
 			<div class="modal-footer">
 				<span class="modal-pricetag"><?= $data['sum']?></span>
-                <?php
-                if(empty($_SESSION['order'])):?>
 				<div class="footer-buttons">
+				<?php
+                if(empty($_SESSION['order'])):?>
 					<a class="button button-primary" href="/?page=cart&order=true"><button>Оформить заказ</button></a>
 					<button class="button clear-cart">Отмена</button>
+					<?php endif;?>
 				</div>
-                <?php endif;?>
+                
 			</div>
 			<!-- /.modal-footer -->
 		</div>
 		<!-- /.modal-dialog -->
+		<?php endwhile;?>
 	</div>
+<?php }?>
 </body>
 </html>

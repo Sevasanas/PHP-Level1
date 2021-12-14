@@ -21,14 +21,23 @@ include_once "../models/functions.php";
         </button>
     </div>
     <div class="cards cards-menu">
-        <form method="post" action="../models/addProducts.php" enctype="multipart/form-data">
-            <p><strong>Добавить товар:</strong></p>
-            <p>Введите наименование: <br><input type="text" name="name" maxlength="100" required></p>
-            <p>Введите описание: <br><textarea name="description" rows="10" required></textarea></p>
-            <p>Введите цену: <br><input type="number" name="price" maxlength="20" required></p>
-            <p><strong>Загрузите картинку в формате JPEG, PNG или GIF</strong></p>
-            <p><input type="file" name="img" accept="image/jpeg,image/png,image/gif" required></p>
-            <p><input type="submit" name="submit"></p>
+        <?php 
+        if($_GET['success'] == 1){?>
+            <h1 style="color: red;">Товар успешно добавлен!</h1>
+        <?php }
+        ?>
+        <h1>Добавление нового товара</h1>
+
+        <form action="engine/admin_goods.php" method="post" enctype="multipart/form-data">
+            <p>Название товара</p>
+            <input type="text" name="title">
+            <p>Стоимость товара</p>
+            <input type="text" name="price">
+            <p>Информация о товаре</p>
+            <textarea name="info" rows="10" cols="30"></textarea>
+            <p>Загрузить фото</p>
+            <input type="file" name="photo" accept="image/*"><br></br>
+            <input type="submit" value="Сохранить"> 	
         </form>
     </div>
 </body>
