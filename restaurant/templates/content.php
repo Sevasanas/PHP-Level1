@@ -1,17 +1,14 @@
 <?php
     switch($_GET['page']){
-        case 'form':
-            include "pages/form.php";
-            break;
          case 'auth':
             include "pages/auth.php";
             break;
             
          case 'add_good':
-             include "pages/admin/add_good.php";
+             include "admin/add_good.php";
              break;
         case 'edit_good':
-            include "pages/admin/edit_good.php";
+            include "admin/edit_good.php";
             break;
          case 'prices':
             include "pages/prices.php";
@@ -23,7 +20,7 @@
            include "admin/detail_order.php";
            break;
        case 'cart':
-            include "pages/cart.php";
+            include "public/cart.php";
             break;
        
             

@@ -2,6 +2,7 @@
 session_start();
 //Это файл помещает товар в корзину
 include "../models/functions.php";
+include "../config/config.php";
 $id = (int)($_GET['id']);
 
 $sql = "SELECT * FROM cart WHERE id_good = $id and id_user=".$_SESSION['id_user'];//ищем добавляемый товар в корзине
