@@ -1,21 +1,30 @@
+<?php
+$baseMenu = ["Главная" => "/"];
+$menuForNotAuthUser = ["Регистрация" => "?page=reg", "Войти" => "?page=auth"];
+$menuForAuthUser = ["Личный кабинет" => "?page=cabinet", "Выйти" => "?page=exit", "Корзина" => "?page=cart"];
+
+if(isset($_SESSION['id_user'])){//значит авторизован
+    $menu = array_merge($baseMenu,$menuForAuthUser);
+}
+else{
+    $menu = array_merge($baseMenu,$menuForNotAuthUser);
+}
+
+$list .= "<button class='button button-primary button-auth'>";
+foreach($menu as $name => $link){
+	 $list .= "<li class='button-text'><a href='$link'>$name</li>";
+}
+$list .= "</button>";
+
+
+?>
 <a href="index.php" class="logo">
-    <img src="img/icon/logo.svg" alt="Logo" />
+    <img src="img/icon/logo.svg" alt="Logo"/>
 </a>
 <label class="address">
 	<input type="text" class="input input-address" placeholder="Адрес доставки" />
 </label>
 <div class="buttons">
     <span class="user-name"></span>
-	<button class="button button-primary button-auth">
-		<span class="button-auth-svg"></span>
-		<span class="button-text">Войти</span>
-	</button>
-	<button class="button button-cart" id="cart-button">
-		<span class="button-cart-svg"></span>
-		<span class="button-text">Корзина</span>
-	</button>
-	<button class="button button-primary button-out">
-		<span class="button-text">Выйти</span>
-		<span class="button-out-svg"></span>
-	</button>
+	<?= $list?>
 </div>

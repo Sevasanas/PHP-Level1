@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -27,41 +29,12 @@
 				<?php
 				include "../templates/menu.php";
 				?>
+
 				<div class="cards cards-menu">
 				<?php
-				require_once "../models/functions.php";
-				require_once "../config/config.php";
-				$products = productsAll($link);
-				if($products){
-					foreach($products as $product):?>
-					<div class="card">
-						<a href="card.php?id=<?=$product['id']?>"class="card-image"><img src="<?=PHOTOSMALL.$product['img']?>" alt=""></a>  
-						<div class="card-text">
-							<div class="card-heading">
-								<h3 class="card-title card-title-reg"><a href="card.php?id=<?=$product['id']?>"><?=$product['name']?></a></h3>
-							</div>
-							<!-- /.card-heading -->
-							<div class="card-info">
-								<div class="ingredients"><?=$product['description']?></div>
-							</div>
-							<!-- /.card-info -->
-							<div class="card-buttons">
-								<button class="button button-primary button-add-cart">
-									<span class="button-card-text"><a href="#">В корзину</a></span>
-									<span class="button-cart-svg"></span>
-								</button>
-								<strong class="card-price-bold"><?=$product['price']?></strong>
-							</div>
-						</div>
-						<!-- /.card-text -->
-					</div>
-					<!-- /.card -->
-					<?php endforeach;
-				}?>
-
-				</div>
-				<!-- /.cards -->
-			</section>
+				include "../pages/prices.php";
+				include "../templates/content.php";
+				?>
 		</div>
 		<!-- /.container -->
 	</main>

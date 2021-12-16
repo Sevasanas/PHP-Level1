@@ -15,7 +15,7 @@ function createOrder($link){
     $res = mysqli_query($link,$sql);
      $check = true;
      if($res){
-        $getTotal = "SELECT SUM(pizza.price * cart.count) AS 'total' FROM pizza INNER JOIN cart ON cart.id_good = pizza.id WHERE id_user=".$_SESSION['id_user']; 
+        $getTotal = "SELECT SUM(pizza.price * cart.count) AS 'total' FROM pizza INNER JOIN cart ON cart.id_pizza = pizza.id WHERE id_user=".$_SESSION['id_user']; 
         $r = mysqli_query($link, $getTotal);
         $total = mysqli_fetch_assoc($r)['total']; 
          
@@ -81,7 +81,7 @@ function updateOrder($link,$id_order,$id_user){
 }
 
 function detailOrder($link,$id_user){
-    $sql = "SELECT id_pizza, name, price*count AS sum,count FROM pizza INNER JOIN cart ON cart.id_good = goods.id WHERE id_user=$id_user";
+    $sql = "SELECT id_pizza, name, price*count AS sum,count FROM pizza INNER JOIN cart ON cart.id_pizza = pizzas.id WHERE id_user=$id_user";
     $res = mysqli_query($link,$sql);
     while($good = mysqli_fetch_assoc($res)){
         $goods[] = $good;//добавление элементов в массив
@@ -105,60 +105,48 @@ function productsAll($link){
     return $products;
 }
 
-function productsNew($link, $name, $description, $price, $img){
-    $t = "INSERT INTO pizza (name, description, price, img) VALUES ('%s', '%s', '%s', '%s')";
-
-    $query = sprintf($t, mysqli_real_escape_string($link, $name),mysqli_real_escape_string($link, $description),mysqli_real_escape_string($link, $price),mysqli_real_escape_string($link, $img));
-
-    $result = mysqli_query($link, $query);
-
-    if(!$result) {
-        die(mysqli_error($link));
+function addGood($link,$name,$description,$price,$img){
+    $sql = "INSERT INTO pizza(name,description,price,img) VALUE('$name','$description',$price,'$img')";
+    $res = mysqli_query($link,$sql);
+    if($res){
+        return 1;
     }
-
-    return true;
-}
-function productsGet($link, $id){
-    $query = sprintf("SELECT * FROM pizza WHERE id=%d", (int)$id);
-    $result = mysqli_query($link, $query);
-
-    if(!$result) {
-        die(mysqli_error($link));
-    }
-
-    $product = mysqli_fetch_assoc($result);
-
-    return $product;
+    return 0;
 }
 
-function productsDelete($link, $id){
-    $id = (int)$id;
-
+function getGoods($link,$id=0){
     if($id == 0) {
-        return false;
+        $sql = "SELECT * FROM pizza";
+        $res = mysqli_query($link,$sql);
+        while($pizza = mysqli_fetch_assoc($res)){//каждую строку в базе с товаром преобразовали в массив $pizza
+            $goods[$pizza['id']] = $pizza['name'];//каждый товар добавили в массив товаров $goods
+        }
+        return $goods;
     }
-
-    $query = sprintf("DELETE FROM pizza WHERE id='%d'", $id);
-    $result = mysqli_query($link, $query);
-
-    if(!$result) {
-        die(mysqli_error($link));
+    else{
+        $sql = "SELECT * FROM pizza WHERE id=$id";
+        $res = mysqli_query($link,$sql);
+        return mysqli_fetch_assoc($res);//вернули массив из 1 элемента
     }
-    return mysqli_affected_rows($link);
 }
 
-function productsEdit($link, $id, $name, $description, $price, $img){
-    $id = (int)$id;
-
-    $sql = "UPDATE pizza SET name='%s', description='%s', price='%s', img='%s' WHERE id='%d'";
-
-    $query = sprintf($sql, mysqli_real_escape_string($link, $name), mysqli_real_escape_string($link, $description), mysqli_real_escape_string($link, $price), mysqli_real_escape_string($link, $img),$id);
-
-    $result = mysqli_query($link, $query);
-
-    if(!$result) {
-        die(mysqli_error($link));
+function deleteGood($link,$idGood){
+    $sql = "DELETE FROM pizza WHERE id=$idGood";
+    $res = mysqli_query($link,$sql);
+    if($res){
+        return 1;
     }
-    return mysqli_affected_rows($link);
+    return 0;
 }
+
+function updateGood($link,$name,$description,$price,$img,$id){
+    $sql = "UPDATE pizza SET name='$name',description='$description',price=$price,img='$img' WHERE id=$id";
+
+    $res = mysqli_query($link,$sql);
+    if($res){
+        return 1;
+    }
+    return 0;
+}
+
 

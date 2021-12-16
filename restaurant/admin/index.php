@@ -14,11 +14,6 @@ require_once "../models/functions.php";
 <a href="index.php" class="logo">
     <img src="img/icon/logo.svg" alt="Logo" />
 </a>
-<div class="buttons">
-	<button class="button button-primary button-auth">
-		<span class="button-text"><a href="add.php">Добавить товар</a></span>
-	</button>
-</div>
 <div class="section-heading">
 	<h2 class="section-title restaurant-title">Админ</h2>
 </div>
@@ -42,8 +37,9 @@ require_once "../models/functions.php";
                     <!-- /.card-info -->
                     <div class="card-buttons">
                         <button class="button button-primary button-add-cart">
-                            <span class="button-card-text"><a href="edit.php?id=<?=$product['id']?>">Редактировать</a></span>
-                            <span class="button-card-text"><a href="delete.php?id=<?=$product['id']?>">Удалить</a></span>
+                            <span class="button-card-text"><a href="edit_good.php?id=<?=$product['id']?>">Редактировать</a></span>
+                            <span class="button-card-text"><a href="add_good.php?id=<?=$product['id']?>">Добавить</a></span>
+							<span class="button-card-text"><a href="detail_order.php?id=<?=$product['id']?>">Управление заказами</a></span>
                         </button>
                     </div>
 			    </div>

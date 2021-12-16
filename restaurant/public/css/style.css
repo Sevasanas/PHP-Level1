@@ -110,7 +110,7 @@ button {
     background-position: 20px 13px;
 }
 
-.button-primary .button-auth-svg {
+.button-primary{
     width: 24px;
     height: 24px;
     background-color: #fff;
@@ -145,7 +145,6 @@ button {
 }
 
 .button-cart {
-    display: none;
     margin: 0 5px;
 }
 
@@ -808,6 +807,10 @@ button {
         min-height: 40px;
         padding: 5px 12px;
 
+    }
+
+    .button-text {
+        text-decoration: none;
     }
 
     .button-out-svg {
